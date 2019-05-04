@@ -1,0 +1,12 @@
+{
+  "name": "api-rest",
+  "version": "0.0.0",
+  "description": "ApiRest",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "mssql": "^5.1.0"
+  }
+}
