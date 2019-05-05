@@ -2,7 +2,7 @@
 var settings = require("../settings");
 
 exports.executeSql = function (Sql, Callback) {
-    //console.log("SQL " + Sql);
+    console.log("SQL " + Sql);
     const conn = new sqlDb.ConnectionPool(settings.dbConfig);
     conn.connect()
     .then(function () {

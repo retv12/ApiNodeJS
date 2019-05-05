@@ -29,10 +29,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="controllers\bancos.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="controllers\employee.js" />
+    <Compile Include="controllers\geolocalizacion.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="core\db.js" />
     <Compile Include="core\httpMsgs.js" />
     <Compile Include="core\server.js" />
+    <Compile Include="routes.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Settings.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
