@@ -22,6 +22,7 @@ router.get('/', (req, res) => {
 
 // rutas de estados
 router.route('/estados').get(geolocalizacion.getestados);
+router.route('/ciudades/:idestado').get(geolocalizacion.getciudades);
 
 // rutas de estados
 router.route('/employee').get(employee.getlist);

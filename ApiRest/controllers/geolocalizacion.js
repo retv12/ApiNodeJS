@@ -2,8 +2,7 @@
 var httpMsgs = require("../core/httpMsgs"); 
 
 exports.getestados = function (req, res) {
-    console.log("llego a getestados");
-    db.executeSql("SELECT * FROM emp", function (data, err) {
+    db.executeSql("select idestado,nombreestado from Geolocalizacion group by idestado,nombreestado order by nombreestado", function (data, err) {
         if (err) {
             httpMsgs.show500(req, resp, err);
         } else {
@@ -13,7 +12,14 @@ exports.getestados = function (req, res) {
     });
 };
 
-//    getciudades: function (req, res) {
-//        //do something
-//    }
-//};
+exports.getciudades = function (req, res) {
+    // esto lee el parametro del url -- req.params.idestado
+    db.executeSql("select idciudad, nombreciudad from Geolocalizacion where idestado =" + req.params.idestado + " order by nombreciudad ", function (data, err) {
+        if (err) {
+            httpMsgs.show500(req, resp, err);
+        } else {
+            httpMsgs.sendJson(req, res, data);
+        }
+        res.end();
+    });
+};
