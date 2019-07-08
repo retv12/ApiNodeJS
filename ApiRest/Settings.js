@@ -2,7 +2,7 @@ exports.dbConfig = {
     user: "sa",
     password: "sa",
     server: "RT-ASUS",
-    database: "Sampledb",
+    database: "MBComun1920",
     port: 1433
 };
 

@@ -14,6 +14,27 @@ const httpMsgs = require("./core/httpMsgs");
 const geolocalizacion = require("./controllers/geolocalizacion");
 const employee = require("./controllers/employee");
 
+// Cache
+var mcache = require('memory-cache');
+
+var cache = (duration) => {
+    return (req, res, next) => {
+        let key = '__miboleto__' + req.originalUrl || req.url;
+        let cachedBody = mcache.get(key);
+        if (cachedBody) {
+            res.send(cachedBody);
+            return;
+        } else {
+            res.sendResponse = res.send;
+            res.send = (body) => {
+                mcache.put(key, body, duration * 1000);
+                res.sendResponse(body);
+            };
+            next();
+        }
+    };
+};
+//
 router.get('/', (req, res) => {
     httpMsgs.show404(req, res);
 });
@@ -21,8 +42,8 @@ router.get('/', (req, res) => {
 // rutas del proyecto
 
 // rutas de estados
-router.route('/estados').get(geolocalizacion.getestados);
-router.route('/ciudades/:idestado').get(geolocalizacion.getciudades);
+router.route('/estados').get(cache(60 * 60 * 24), geolocalizacion.getestados);
+router.route('/ciudades/:idestado').get(cache(60 * 60 * 24), geolocalizacion.getciudades);
 
 // rutas de estados
 router.route('/employee').get(employee.getlist);
